@@ -1,6 +1,7 @@
 <h1>Add a New Photo</h1>
 
-{{view Ember.TextField valueBinding="controller.content.title"}}
-{{view Ember.TextField valueBinding="controller.content.url"}}
+<label for="title-field">Title:</label>{{view Ember.TextField id="title-field" valueBinding="controller.content.title"}}
+<label for="url-field">URL:</label>{{view Ember.TextField id="url-field" valueBinding="controller.content.url"}}
 
-<button {{action save target="Photoblog.stateManager"}}
+<button {{action save target="Photoblog.stateManager"}}>Save</button>
+<button {{action cancel target="Photoblog.stateManager"}}>Cancel</button>

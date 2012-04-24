@@ -1,4 +1,4 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
+// This is a manifest file that'll be compled into application.js, which will include all the files
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
@@ -25,20 +25,7 @@ $(function() {
   Photoblog.stateManager.goToState('photos.index');
 
   Photoblog.photosView = Ember.ContainerView.create({
-    templateNameBinding: 'Photoblog.stateManager.currentState.templateName',
-    controllerBinding: 'Photoblog.stateManager.currentState.controller',
-
-    currentView: function() {
-      var templateName = this.get('templateName'),
-          controller = this.get('controller');
-
-      if (!controller || !templateName) { return null; }
-
-      return Ember.View.create({
-        controller: Ember.getPath(controller),
-        templateName: templateName
-      });
-    }.property('templateName', 'controller').cacheable()
+    currentViewBinding: 'Photoblog.stateManager.currentState.view'
   });
 
   Photoblog.photosView.append();

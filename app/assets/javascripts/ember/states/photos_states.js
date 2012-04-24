@@ -1,9 +1,12 @@
 Photoblog.stateManager = Ember.StateManager.create({
+  initialState: 'photos',
+
   states: {
     photos: Ember.State.create({
+      initialState: 'index',
+
       index: Ember.State.create({
-        templateName: 'ember/templates/photos/index',
-        controller: 'Photoblog.photosController',
+        view: Photoblog.IndexView.create(),
 
         showCreate: function(manager) {
           manager.goToState('create');
@@ -11,8 +14,7 @@ Photoblog.stateManager = Ember.StateManager.create({
       }),
 
       create: Ember.State.create({
-        templateName: 'ember/templates/photos/create',
-        controller: 'Photoblog.photoController',
+        view: Photoblog.CreateView.create(),
 
         enter: function(manager) {
           var transaction = Photoblog.store.transaction();
