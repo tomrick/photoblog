@@ -22,9 +22,23 @@ $(function() {
 
   Photoblog.photosController.set('content', photos);
 
-  Photoblog.photosView = Ember.View.create({
-    templateName: 'ember/templates/photos',
-    controller: Photoblog.photosController
+  Photoblog.stateManager.goToState('photos.index');
+
+  Photoblog.photosView = Ember.ContainerView.create({
+    templateNameBinding: 'Photoblog.stateManager.currentState.templateName',
+    controllerBinding: 'Photoblog.stateManager.currentState.controller',
+
+    currentView: function() {
+      var templateName = this.get('templateName'),
+          controller = this.get('controller');
+
+      if (!controller || !templateName) { return null; }
+
+      return Ember.View.create({
+        controller: Ember.getPath(controller),
+        templateName: templateName
+      });
+    }.property('templateName', 'controller').cacheable()
   });
 
   Photoblog.photosView.append();

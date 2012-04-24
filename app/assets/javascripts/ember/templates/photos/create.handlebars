@@ -1,0 +1,6 @@
+<h1>Add a New Photo</h1>
+
+{{view Ember.TextField valueBinding="controller.content.title"}}
+{{view Ember.TextField valueBinding="controller.content.url"}}
+
+<button {{action save target="Photoblog.stateManager"}}
