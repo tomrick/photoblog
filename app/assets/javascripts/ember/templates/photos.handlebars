@@ -1,0 +1,8 @@
+<h1>My Photoblog</h1>
+
+{{#each controller}}
+  <div class="photo">
+    <h2>{{title}}</h2>
+    <img {{bindAttr src="url"}}>
+  </div>
+{{/each}}
