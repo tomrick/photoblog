@@ -1,7 +1,6 @@
 Photoblog::Application.routes.draw do
-  resources :tags
-
   resources :photos
+  resources :comments
 
   root :to => 'assets#index'
 

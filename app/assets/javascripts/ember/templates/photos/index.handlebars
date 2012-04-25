@@ -4,6 +4,25 @@
   <div class="photo">
     <h2>{{title}}</h2>
     <img {{bindAttr src="url"}}>
+    <br>
+
+    <br>
+    {{#if view.isEditing}}
+      {{view Ember.TextField valueBinding="view.comment.text"}}
+      <br>
+      <button {{action saveComment target="Photoblog.stateManager"}}>Save Comment</button>
+    {{else}}
+      <button {{action addComment target="Photoblog.stateManager"}}>Add Comment</button>
+    {{/if}}
+
+    {{#if comments.length}}
+      <h3>Comments</h3>
+      <ul>
+        {{#each comments}}
+          <li>{{text}}
+        {{/each}}
+      </ul>
+    {{/if}}
   </div>
 {{/each}}
 

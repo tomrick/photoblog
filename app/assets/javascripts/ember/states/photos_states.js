@@ -10,6 +10,33 @@ Photoblog.stateManager = Ember.StateManager.create({
 
         showCreate: function(manager) {
           manager.goToState('create');
+        },
+
+        addComment: function(manager, evt) {
+          debugger;
+          var view = evt.view;
+          var transaction = Photoblog.store.transaction();
+          var comment = transaction.createRecord(Photoblog.Comment, {
+            text: "booyakasha"
+          });
+
+          view.setProperties({
+            transaction: transaction,
+            comment: comment,
+            isEditing: true
+          });
+        },
+
+        saveComment: function(manager, evt) {
+          var view = evt.view;
+          var transaction = view.get('transaction');
+          var comment = view.get('comment');
+          var photo = evt.context;
+
+          photo.get('comments').pushObject(comment);
+
+          transaction.commit();
+          view.set('isEditing', false);
         }
       }),
 

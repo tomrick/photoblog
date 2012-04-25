@@ -22,6 +22,10 @@ $(function() {
 
   Photoblog.photosController.set('content', photos);
 
+  Photoblog.getPath('store.adapter').mappings = {
+    comments: Photoblog.Comment
+  };
+
   Photoblog.stateManager.goToState('photos.index');
 
   Photoblog.photosView = Ember.ContainerView.create({
