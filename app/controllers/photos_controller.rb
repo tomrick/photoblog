@@ -20,7 +20,7 @@ class PhotosController < ApplicationController
 
   # POST /photos.json
   def create
-    @photo = Photo.new(params[:photo])
+    @photo = Photo.create(params[:photo])
     @photo.save
 
     respond_with @photo

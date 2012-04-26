@@ -1,29 +1,32 @@
 <h1>My Photoblog</h1>
 
 {{#each controller}}
-  <div class="photo">
-    <h2>{{title}}</h2>
-    <img {{bindAttr src="url"}}>
-    <br>
-
-    <br>
-    {{#if view.isEditing}}
-      {{view Ember.TextField valueBinding="view.comment.text"}}
+  {{#view contentBinding="this"}}
+    <div class="photo">
+      <h2>{{content.title}}</h2>
+      <img {{bindAttr src="content.url"}}>
       <br>
-      <button {{action saveComment target="Photoblog.stateManager"}}>Save Comment</button>
-    {{else}}
-      <button {{action addComment target="Photoblog.stateManager"}}>Add Comment</button>
-    {{/if}}
 
-    {{#if comments.length}}
-      <h3>Comments</h3>
-      <ul>
-        {{#each comments}}
-          <li>{{text}}
-        {{/each}}
-      </ul>
-    {{/if}}
-  </div>
+      <a href="#" {{action showEdit target="Photoblog.stateManager"}}>Edit Photo</a>
+      <br>
+      {{#if view.isEditing}}
+        {{view Ember.TextField valueBinding="view.comment.text"}}
+        <br>
+        <button {{action saveComment target="Photoblog.stateManager"}}>Save Comment</button>
+      {{else}}
+        <button {{action addComment target="Photoblog.stateManager"}}>Add Comment</button>
+      {{/if}}
+
+      {{#if content.comments.length}}
+        <h3>Comments</h3>
+        <ul>
+          {{#each content.comments}}
+            <li>{{text}}
+          {{/each}}
+        </ul>
+      {{/if}}
+    </div>
+  {{/view}}
 {{/each}}
 
 <button {{action showCreate target="Photoblog.stateManager"}}>Add Photo</button>
